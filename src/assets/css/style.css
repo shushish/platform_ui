@@ -1,0 +1,407 @@
+*{box-sizing: border-box}
+html,
+body {
+  font-family:'微软雅黑', '宋体', 'SimSun', STHeiti, MingLiu, Arial, sans-serif;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: #f5f7f9;
+}
+
+html,
+body,R
+div,
+ul,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+input,
+select,
+label {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style-type: none;
+}
+
+input,
+button,
+select,
+textarea {
+  font-family: 'Microsoft YaHei', '微软雅黑', '宋体', STHeiti, MingLiu, Arial, sans-serif;line-height: normal;
+}
+textarea{text-align: left!important;}
+
+table {
+  /*border-collapse:0;*/
+  border-spacing: 0;
+}
+
+input {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  margin-bottom: 0;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+  /* color: #333; */
+}
+
+
+/*公用样式*/
+.fl{
+  float:left;
+}
+.fr{
+  float:right;
+}
+clear::before,
+clear::after{
+  content:'';
+  display:block;
+  height:0;
+  line-height:0;
+  clear:both;
+}
+
+
+/*flex布局*/
+.flex-box{display: -webkit-box;display: -ms-flexbox;display: flex;}
+.flex-0{  -webkit-box-flex: 1;-webkit-flex: 0.5;}
+.flex-1{  -webkit-box-flex: 1;-webkit-flex: 1;}
+.flex-2{  -webkit-box-flex: 2;-webkit-flex: 2;}
+.flex-3{  -webkit-box-flex: 3;-webkit-flex: 3;}
+.flex-4{  -webkit-box-flex: 4;-webkit-flex: 4;}
+.flex-5{  -webkit-box-flex: 5;-webkit-flex: 5;}
+.flex-6{  -webkit-box-flex: 6;-webkit-flex: 6;}
+.flex-7{  -webkit-box-flex: 7;-webkit-flex: 7;}
+.flex-8{  -webkit-box-flex: 8;-webkit-flex: 8;}
+.flex-9{  -webkit-box-flex: 9;-webkit-flex: 9;}
+/*flex布局*/
+
+
+
+
+
+
+
+
+
+
+
+/*CRM*/
+
+.content{
+	width: 100%;
+	/* padding:15px; */
+	font-size:14px;
+}
+.CRMbox{
+	border: 1px solid #ddd;
+	background:#fff;
+	border-radius: 5px;
+	padding:15px;
+	margin-bottom: 15px;
+	overflow: hidden;
+}
+.CRMbox-title{}
+/* .CRMbox-title span{
+	margin-right: 20px;
+} */
+.CRMbox-title-icon{
+	width: 3px;
+	height: 10px;
+	display: inline-block;
+	margin-right: 5px;
+}
+.CRMbox-title-icon1{
+  width: 3px;
+  height: 15px;
+  display: inline-block;
+  margin-right: 5px;
+
+}
+
+.icon-blue1{
+  background: #015A96;
+}
+.icon-red{
+	background: #db3d0a;
+}
+.icon-green{
+	background: #00CC00;
+}
+.icon-blue{
+	background: #00a0e9;
+}
+.CRMbox-cont{}
+.CRMbox-cont-list{
+	margin-top: 15px;
+	overflow: hidden;
+	clear: both;
+}
+.CRMbox-form{
+	margin-right: 30px;
+	float: left;
+}
+.CRMbox-form-name{
+	width: 80px;
+	text-align: justify;
+	line-height: 40px;
+}
+.CRMbox-form-nameauto{
+	font-weight: bold;
+}
+.CRMbox-form-name1{
+	width: 100px;
+	text-align: justify;
+	line-height: 40px;
+}
+.CRMbox-form-cont{
+	height: 40px;
+	line-height: 40px;
+}
+
+.CRMbox-form-name i,.CRMbox-form-name1 i{
+	color: #FF0000;
+	font-style: normal;
+}
+
+.CRMbox-form-input{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 0 10px;
+}
+.icon-margin{
+	margin-top: 15px;
+}
+.icon-search{
+	width: 19px;
+	height: 40px;
+	background: url(../images/icon-search.png) no-repeat 0 center;
+	display: inline-block;
+	float: right;
+	margin-right: 10px;
+}
+.icon-arrow-bottom{
+	width: 10px;
+	height: 10px;
+	border:#ddd solid;
+	border-width: 1px 1px 0 0;
+	transform: rotate(135deg);
+	display: block;
+	float: right;
+	margin: 10px 10px 0 0;
+ }
+.CRMbox-button{}
+.CRMbox-button button{
+	padding: 8px 15px;
+	border-radius: 3px;
+	color: #fff;
+	background:none;
+	border:none;
+}
+.CRMbox-button .reset{
+	background: #b7bfc6;
+}
+.CRMbox-button .reset1{
+	background: #00A0E9;
+}
+.CRMbox-button .save{
+	background: #007bc7;
+}
+.CRMbox-tab{
+	height: 50px;
+	line-height: 50px;
+	background: #eeeff0;
+	margin: -15px -15px 0 -15px;
+	overflow: hidden;
+	clear: both;
+}
+.CRMbox-tab ul{}
+.CRMbox-tab ul li{
+	float: left;
+	padding: 0 40px;
+	border-right: 1px solid #ddd;
+}
+.CRMbox-tab ul li a{
+
+}
+.CRMbox-tab ul li.active{
+	border-top: 2px solid #00a0e9;
+	background: #fff;
+	height: 50px;
+	line-height: 50px;
+}
+.CRMbox-button-margin{
+	margin-right: 15px;
+}
+.CRMbox-table{
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+	margin-top: 15px;
+}
+.CRMbox-table thead{
+	height: 40px;
+	line-height: 40px;
+	background: #f4f4f5;
+}
+.CRMbox-table thead tr td{
+	font-weight: normal;
+}
+.CRMbox-table tbody tr{
+	border-bottom: 1px solid #f4f4f5;
+	line-height: 40px;
+}
+
+/*设计*/
+.CRMbox-design{}
+.CRMbox-design-title{
+	margin: 15px 0;
+}
+.CRMbox-design-loudong{}
+.CRMbox-design-table{
+	border-collapse: collapse;
+	text-align: center;
+	width: 100%;
+}
+.CRMbox-design-table tr{
+	height: 40px;
+}
+.CRMbox-design-table tr td{
+	border: 1px solid #ddd;
+}
+.CRMbox-design-table tr td p{
+	font-size: 12px;
+	color: #999;
+	margin-top: 10px;
+}
+.CRMbox-design-table tr:first-child{
+	background: #eeeff0;
+}
+.CRMbox-design-table tr td a{
+	color: #007bc7;
+}
+.CRMbox-design-goujian{
+	margin-left: 15px;
+}
+.CRMbox-design-goujian table td{
+	width: 20%;
+}
+.CRMbox-form-name-two{
+	line-height: 20px;
+}
+.CRMbox-form-textarea{
+	height: 80px;
+}
+.margin-right-none{
+	margin-right: 0;
+}
+.CRMbox-form-name-widthauto{
+	width: auto;
+	margin-right: 10px;
+}
+.CRMbox-design-gongqi table td{
+	width: 20%;
+}
+.CRMbox-develop-form{
+	margin-left: 15px;
+}
+.icon-unit{
+	font-style: normal;
+	color: #999;
+}
+.CRMbox-buttongroup{}
+.CRMbox-buttongroup li{
+	float: left;
+	margin-left: 5px;
+}
+.CRMbox-buttongroup li a{
+	padding: 3px 5px;
+	color: #fff;
+	text-align: center;
+	display: inline-block;
+	background: #007bc7;
+	border-radius: 3px;
+}
+.CRMbox-buttongroup li i{
+	line-height: 25px;
+}
+.CRMbox-material{
+	margin-top: 15px;
+	overflow: hidden;
+	clear: both;
+}
+.CRMbox-material-table table tr:first-child{
+	background: none;
+}
+.CRMbox-material .icon-arrow-bottom{
+	width: 8px;
+	height: 8px;
+	margin: 3px 20px 0 0;
+}
+.CRMbox-comparison{
+	margin-top: 15px;
+}
+.CRMbox-comparison a{
+	color: #007bc7;
+	display: block;
+}
+.CRMbox-fack{
+	margin-top: 15px;
+}
+.CRMbox-fack-button{
+	margin-left: 30px;
+	margin-top: 80px;
+}
+.CRMbox-fack-button a{
+	padding: 3px 5px;
+    color: #fff;
+    text-align: center;
+    display: block;
+    background: #007bc7;
+    border-radius: 3px;
+	margin-top: 10px;
+}
+
+table.gridtable {
+		font-family: verdana, arial, sans-serif;
+		font-size: 11px;
+		color: #333333;
+		border-width: 1px;
+		border-color: #666666;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	font-size: 14px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	font-size: 14px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+	text-align: center;
+}
