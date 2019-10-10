@@ -31,9 +31,21 @@
 						<Input v-model="addRole.name" placeholder="请输入角色名称"></Input>
 					</FormItem>
 					<FormItem label="关联资源：" prop="permissionId">
-						<zk-table ref="treeTableAdd" sum-text="sum" index-text="#" :border="true" :data="permissionTableData" :columns="treeDataColumns"
+<!-- 						<zk-table ref="treeTableAdd" sum-text="sum" index-text="#" :border="true" :data="permissionTableData" :columns="treeDataColumns"
 						 :expand-type="false" :selection-type="true">
-						</zk-table>
+						</zk-table> -->
+            <vxe-table
+              ref="treeTableAdd"
+              auto-resize
+              :tree-config="{children: 'children'}"
+              :data="permissionTableData">
+              <vxe-table-column type="selection" tree-node></vxe-table-column>
+              <vxe-table-column field="name" title="资源名称"></vxe-table-column>
+              <vxe-table-column field="type" title="资源类型"></vxe-table-column>
+              <vxe-table-column field="perCode" title="权限代码"></vxe-table-column>
+              <vxe-table-column field="url" title="URL地址"></vxe-table-column>
+              <vxe-table-column field="clazz" title="样式"></vxe-table-column>
+            </vxe-table>
 					</FormItem>
 					<FormItem label="是否可用：">
 						<i-switch v-model="addRole.available" size="large" true-value="1" false-value="0">
@@ -58,9 +70,23 @@
 						<Input v-model="updateRole.name" placeholder="请输入角色名称"></Input>
 					</FormItem>
 					<FormItem label="关联资源：" prop="permissionId">
-						<zk-table ref="treeTableUpdate" sum-text="sum" index-text="#" :border="true" :data="permissionTableData" :columns="treeDataColumns"
+						<!-- <zk-table ref="treeTableUpdate" sum-text="sum" index-text="#" :border="true" :data="permissionTableData" :columns="treeDataColumns"
 						 :expand-type="false" :selection-type="true" v-model="updateRole.permissionId">
-						</zk-table>
+						</zk-table> -->
+            <vxe-table
+              ref="treeTableUpdate"
+              auto-resize
+              :tree-config="{children: 'children'}"
+              :select-config="{checkStrictly:true}"
+              :data="permissionTableData"
+              row-id = "id">
+              <vxe-table-column type="selection" tree-node></vxe-table-column>
+              <vxe-table-column field="name" title="资源名称"></vxe-table-column>
+              <vxe-table-column field="type" title="资源类型"></vxe-table-column>
+              <vxe-table-column field="perCode" title="权限代码"></vxe-table-column>
+              <vxe-table-column field="url" title="URL地址"></vxe-table-column>
+              <vxe-table-column field="clazz" title="样式"></vxe-table-column>
+            </vxe-table>
 					</FormItem>
 					<FormItem label="是否可用：">
 						<i-switch v-model="updateRole.available" size="large" true-value="1" false-value="0">
@@ -224,33 +250,8 @@
 						}
 					}
 				],
-				treeDataColumns: [{
-						label: '资源名称',
-						prop: 'name',
-						width: '200px',
-					},
-					{
-						label: '资源类型',
-						prop: 'type',
-						minWidth: '100px',
-					},
-					{
-						label: '权限代码',
-						prop: 'perCode',
-						minWidth: '100px',
-					},
-					{
-						label: 'URL地址',
-						prop: 'url',
-						minWidth: '100px',
-					},
-					{
-						label: '样式',
-						prop: 'clazz',
-						minWidth: '100px',
-					}
-				],
-				tableData: []
+				tableData: [],
+        selected:[]
 			}
 		},
 		methods: {
@@ -309,13 +310,18 @@
 				})
 			},
 			addOk() {
-				// var perIndexs = this.$refs.treeTableAdd.getCheckedProp();
-				// var perIds =[];
-				// for (var i = 0;i < perIndexs.length;i++){
-				//   perIds.push(this.$refs.treeTableAdd.data[i].id)
-				// }
-				const perIds = this.$refs.treeTableAdd.getCheckedProp('id');
-				this.addRole.permissionId = perIds.toString();
+        const rows = this.$refs.treeTableAdd.getSelectRecords();
+        const rowsId = [];
+        //把父级菜单也加上
+        rows.forEach((item) => {
+          if(rowsId.indexOf(item.id)==-1){
+            rowsId.push(item.id);
+          }
+          if(rowsId.indexOf(item.parentId)==-1&&item.parentId){
+            rowsId.push(item.parentId);
+          }
+        })
+        this.addRole.permissionId = rowsId.toString();
 				this.$refs.addRole.validate((valid) => {
 					if (valid) {
 						this.saveRole(this.addRole);
@@ -330,23 +336,36 @@
 			//打开编辑弹框
 			edit(index) {
 				this.updateModal = true;
-				this.$refs.treeTableUpdate.bodyData.forEach((item) => {
-					item._isChecked = false
-				}); //
+        const tableObj = this.$refs.treeTableUpdate;
+        //清空选择项
+        this.selected = [];
+        tableObj.clearSelection();
+        //給需要修改的角色赋值
 				this.updateRole = this.tableData[index];
 				const permissionId = this.updateRole.permissionId;
 				const perArr = permissionId.toString().split(","); //防止第二次点击时 权限ID已经转换成数组
-				this.updateRole.permissionId = perArr;
-				this.$refs.treeTableUpdate.bodyData.forEach((item, index) => {
-					if (perArr.indexOf(item['id']) != -1) {
-						item._isChecked = true;
-					}
-				});
+        this.updateRole.permissionId = perArr;
+        this.selected = perArr;
+        const selectedRows = [];
+        this.selected.forEach((item) => {
+          selectedRows.push(tableObj.getRowById(item))
+        })
+        tableObj.setSelection(selectedRows, true);
 			},
 			//编辑保存
 			editOk() {
-				const perIds = this.$refs.treeTableUpdate.getCheckedProp('id');
-				this.updateRole.permissionId = perIds.toString();
+				const rows = this.$refs.treeTableUpdate.getSelectRecords();
+        const rowsId = [];
+        //把父级菜单也加上
+        rows.forEach((item) => {
+          if(rowsId.indexOf(item.id)==-1){
+            rowsId.push(item.id);
+          }
+          if(rowsId.indexOf(item.parentId)==-1&&item.parentId){
+            rowsId.push(item.parentId);
+          }
+        })
+				this.updateRole.permissionId = rowsId.toString();
 				this.$refs.updateRole.validate((valid) => {
 					if (valid) {
 						this.editRole(this.updateRole, this.$refs.update);
@@ -369,8 +388,6 @@
 						})
 					}
 				});
-
-
 			}
 		},
 		mounted() {
