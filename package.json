@@ -21,7 +21,7 @@
     "html2canvas": "^1.0.0-alpha.12",
     "iview": "^3.3.0",
     "jsdf": "^0.3.2",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "vue": "^2.6.10",
     "vue-js-cookie": "^2.1.0",
     "vue-router": "^3.0.1",
