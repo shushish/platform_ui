@@ -15,7 +15,7 @@
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015-ie": "^6.7.0",
-    "d3": "^5.9.2",
+    "d3": "^7.6.1",
     "echarts": "^4.2.0-rc.1",
     "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-alpha.12",
